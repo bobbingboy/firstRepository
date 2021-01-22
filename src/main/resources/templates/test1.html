@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div id="console"></div>
+	<script>
+fetch("order/add", 
+		{
+    method : "POST",
+    headers : {
+        "Content-Type" : "application/json;charset=UTF-8"
+    },
+    body : JSON.stringify({
+        username  : "signature",
+        userpwd : "12345678"
+         })
+})
+.then(resp => resp.json())
+.then(acct =>  document.getElementById("console").innerHTML = `${acct.name}, ${acct.email}`);
+</script>
+
+</body>
+</html>

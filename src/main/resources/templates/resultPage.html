@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+<div id="title" class="ui-grid-b">
+		<div class="ui-block-a"></div>
+		<div class="ui-block-b">
+			<h1>歡		迎		光		臨</h1>
+		</div>
+		
+		<h3 th:text="'Name:' + ${username}"></h3>
+		
+		<h3 th:text="'Phone:' + ${phone}"></h3>
+		
+		<h3 th:text="'Birthday:' + ${birthday}"></h3>
+		
+		<h3 th:text="'Email:' + ${email}"></h3>
+		<h3 th:text="${msg}"></h3>
+		
+	</div>
+	
+</body>
+</html>
