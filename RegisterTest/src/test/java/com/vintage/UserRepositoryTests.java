@@ -46,4 +46,6 @@ public class UserRepositoryTests {
 		User user = uRepo.findByEmail(email);
 		assertThat(user).isNotNull();
 	}
+	
+	
 }

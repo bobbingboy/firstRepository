@@ -53,6 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 		.maximumSessions(1);
+		//Create personal session to save login information, 
+		//and then set the max session to 1 to prevent multiple login for one user.
+		//When user logout, the session create when login would be expired.
 				
 		http
 			.authorizeRequests()

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "UserInfo")
 @Data
 public class User {
 	@Id

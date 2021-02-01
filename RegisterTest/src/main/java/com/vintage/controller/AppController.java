@@ -49,15 +49,21 @@ public class AppController {
 	
 	@GetMapping("/testpage1")
 	public String testP1(Model m) {
-		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		String user = GetCurrentUserAccount();
 		m.addAttribute("user", user);
 		return "testPage1";
 	}
 	
 	@GetMapping("/testpage2")
 	public String testP2(Model m) {
-		String user = SecurityContextHolder.getContext().getAuthentication().getName();
+		String user = GetCurrentUserAccount();
 		m.addAttribute("user", user);
 		return "testPage2";
+	}
+	
+	public String GetCurrentUserAccount() {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		return userName;
+		// this method is for getting current user account which has login.
 	}
 }
