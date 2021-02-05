@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.configurers.SecurityContextConfigurer;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vintage.model.User;
 import com.vintage.model.UserRepository;
@@ -61,6 +63,66 @@ public class AppController {
 		return "testPage2";
 	}
 	
+	@GetMapping("/forgetPassword")
+	public String forgetPassword() {
+		return "resetPassword";
+	}
+	
+	@PostMapping("/resetPassword")
+	public String getPassword(@RequestParam("email") String email, @RequestParam("password") String secondPwd, Model m) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		if(!uRepo.findByEmail(email).getEmail().isEmpty()) {
+			User user = uRepo.findByEmail(email);
+			user.setPassword(encoder.encode(secondPwd));
+			uRepo.save(user);
+			return "testPage1";
+		}else {
+			m.addAttribute("errors", "NO EMAIL EXIST!! PLEASE CHECK AGAIN.");
+			return "resetPassword";
+		}
+	}
+	
+	@GetMapping("/loginPage")
+	public String viewLoginPage() {
+		return "login3";
+	}
+	
+	@GetMapping("/testpage3")
+	public String viewHomePage(Model m) {
+		String user = GetCurrentUserAccount();
+		m.addAttribute("user", user);
+		return "index3";
+	}
+	
+	@GetMapping("/toActivity")
+	public String viewActivityPage(Model m) {
+//		String user = GetCurrentUserAccount();
+//		m.addAttribute("user", user);
+		return "Activity";
+	}
+	
+	@GetMapping("/home")
+	public String ViewHomePagee() {
+		return "index3";
+	}
+	
+	@GetMapping("/personalInfo")
+	public String viewPersonalInfo() {
+		return "personalInfo";
+	}
+	
+	@GetMapping("/registerNow")
+	public String toRegister(Model m) {
+		m.addAttribute("users", new User());
+		return "register3";
+	}
+	
+	@GetMapping("/registerProcess")
+	public String registerProcess() {
+		return "register_success";
+	}
+		
 	public String GetCurrentUserAccount() {
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		return userName;

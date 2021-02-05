@@ -28,4 +28,16 @@ public class User {
 	
 	@Column(nullable = false, length = 20)
 	private String lastName;
+	
+//	@Column(nullable = true, length = 11)
+//	private String birthday;
+//	
+//	@Column(nullable = true, length = 10)
+//	private String phone;
+//	
+//	@Column(nullable = true, length = 5)
+//	private String gender;
+//	
+//	@Column(nullable = true, length = 10)
+//	private String roles;
 }
